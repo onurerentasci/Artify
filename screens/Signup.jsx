@@ -41,7 +41,7 @@ const Signup = () => {
         } else if (e.code === "auth/email-already-in-use") {
           setError("E-mail already in use!");
         } else {
-          console.log(e.message);
+          setError(e.message);
         }
       }
     }
@@ -72,17 +72,17 @@ const Signup = () => {
         ]}
       >
         <View>
-        {!!error && (
-              <Subheading
-                style={{
-                  color: "#facc15",
-                  textAlign: "center",
-                  fontSize: 14,
-                }}
-              >
-                {error}
-              </Subheading>
-            )}
+          {!!error && (
+            <Subheading
+              style={{
+                color: themeColors.yellow_button,
+                textAlign: "center",
+                fontSize: 14,
+              }}
+            >
+              {error}
+            </Subheading>
+          )}
           <Text style={tw`text-gray-700 ml-4 mb-2 mt-3`}>Username</Text>
           <TextInput
             style={tw`p-3 pl-4 bg-gray-100 text-gray-700 rounded-2xl mb-3`}

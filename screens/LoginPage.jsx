@@ -38,7 +38,7 @@ const LoginPage = () => {
         } else if (e.code === "auth/email-already-in-use") {
           setError("E-mail already in use!");
         } else {
-          console.log(e.message);
+          setError(e.message);
         }
       }
     }
@@ -72,7 +72,7 @@ const LoginPage = () => {
           {!!error && (
             <Subheading
               style={{
-                color: "#facc15",
+                color: themeColors.yellow_button,
                 textAlign: "center",
                 fontSize: 14,
               }}
