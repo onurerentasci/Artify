@@ -15,6 +15,7 @@ import { themeColors } from "../theme";
 import { Ionicons } from "@expo/vector-icons";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";
+import firebase from "firebase/compat/app";
 
 const Signup = () => {
   const navigation = useNavigation();
@@ -26,10 +27,14 @@ const Signup = () => {
   const [error, setError] = useState("");
 
   const createAccount = async () => {
-    if (email && password) {
+    if (email && password && username) {
       setIsLoading(true);
       try {
         await createUserWithEmailAndPassword(auth, email, password);
+        await firebase
+          .firestore()
+          .collection("user")
+          .add({ user: [email, username] });
         navigation.navigate("home");
       } catch (e) {
         setIsLoading(false);
