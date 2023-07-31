@@ -6,14 +6,17 @@ import {
   Image,
   TextInput,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Button, Subheading } from "react-native-paper";
 import tw from "twrnc";
 
 import { themeColors } from "../theme";
 import { Ionicons } from "@expo/vector-icons";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
 import { auth } from "../config/firebase";
 import firebase from "firebase/compat/app";
 
@@ -26,15 +29,25 @@ const Signup = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        navigation.navigate("home");
+      }
+    });
+
+    return () => unsubscribe();
+  }, [navigation]);
+
   const createAccount = async () => {
     if (email && password && username) {
       setIsLoading(true);
       try {
         await createUserWithEmailAndPassword(auth, email, password);
-        await firebase
-          .firestore()
-          .collection("user")
-          .add({ user: [email, username] });
+        await firebase.firestore().collection("userData").add({
+          email: email,
+          username: username,
+        });
         navigation.navigate("home");
       } catch (e) {
         setIsLoading(false);

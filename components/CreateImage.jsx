@@ -11,7 +11,7 @@ const CreateImage = ({ image }) => {
         tw`mt-5`,
         {
           height: "85%",
-          backgroundColor: themeColors.create_canvas,
+          backgroundColor: themeColors.bg,
           borderWidth: 3,
           borderColor: themeColors.yellow_button,
         },

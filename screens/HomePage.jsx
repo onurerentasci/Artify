@@ -14,7 +14,7 @@ const HomePage = () => {
   return (
     <Tabs.Navigator
       screenOptions={({ route }) => ({
-        tabBarLabelStyle: {display:"none"},
+        tabBarLabelStyle: { display: "none" },
         tabBarStyle: { height: 70 },
         tabBarOptions: {
           showLabel: false,
@@ -24,7 +24,7 @@ const HomePage = () => {
             <Octicons
               name={route.name === "create" ? "plus" : "person"}
               color={color}
-              size={40}
+              size={36}
             />
           );
         },
