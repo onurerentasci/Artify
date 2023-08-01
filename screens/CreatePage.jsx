@@ -11,6 +11,7 @@ const CreatePage = () => {
   const [prompt, setPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [image, setImage] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
   const [selectedModel, setSelectedModel] = useState("SDCreate");
 
   async function SDCreate() {
@@ -31,6 +32,7 @@ const CreatePage = () => {
       const blob = await response.blob();
       const dataUrl = await convertBlobToDataUrl(blob);
       setImage(dataUrl);
+      setImageFile(new File(blob), "artify.png",{type:"image/png"})
     } catch (e) {
       console.warn(e);
     } finally {
@@ -75,7 +77,6 @@ const CreatePage = () => {
       setIsLoading(false);
     }
   }
-
 
   async function convertBlobToDataUrl(blob) {
     return new Promise((resolve) => {

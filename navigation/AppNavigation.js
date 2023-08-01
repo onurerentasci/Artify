@@ -10,7 +10,7 @@ import LoginPage from "../screens/LoginPage";
 import Signup from "../screens/Signup";
 import WelcomePage from "../screens/WelcomePage";
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator(); 
 
 export default function AppNavigation() {
   const { user } = useAuth();
