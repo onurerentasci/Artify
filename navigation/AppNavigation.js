@@ -1,5 +1,5 @@
 import "react-native-url-polyfill/auto";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import useAuth from "../hooks/useAuth";
@@ -9,11 +9,26 @@ import ProfilePage from "../screens/ProfilePage";
 import LoginPage from "../screens/LoginPage";
 import Signup from "../screens/Signup";
 import WelcomePage from "../screens/WelcomePage";
+import Loading from "../components/Loading";
 
-const Stack = createNativeStackNavigator(); 
+const Stack = createNativeStackNavigator();
 
 export default function AppNavigation() {
   const { user } = useAuth();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const loadingTimer = setTimeout(() => {
+      setIsLoading(false);
+    }, 4000);
+
+    return () => clearTimeout(loadingTimer);
+  }, []);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
   if (user) {
     return (
       <NavigationContainer>

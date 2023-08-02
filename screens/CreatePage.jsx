@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, SafeAreaView } from "react-native";
-import { TextInput, Button, Chip } from "react-native-paper";
-import { API_KEY, SD_API_KEY } from "@env";
+import { TextInput, Button } from "react-native-paper";
+import { API_KEY } from "@env";
 import CreateImage from "../components/CreateImage";
 import { themeColors } from "../theme";
 import tw from "twrnc";
@@ -11,7 +11,6 @@ const CreatePage = () => {
   const [prompt, setPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [image, setImage] = useState(null);
-  const [imageFile, setImageFile] = useState(null);
   const [selectedModel, setSelectedModel] = useState("SDCreate");
 
   async function SDCreate() {
@@ -32,45 +31,6 @@ const CreatePage = () => {
       const blob = await response.blob();
       const dataUrl = await convertBlobToDataUrl(blob);
       setImage(dataUrl);
-      setImageFile(new File(blob), "artify.png",{type:"image/png"})
-    } catch (e) {
-      console.warn(e);
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  async function DSCreate() {
-    try {
-      setImage(null);
-      setIsLoading(true);
-      const response = await fetch(
-        "https://stablediffusionapi.com/api/v4/dreambooth",
-        {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({
-            key: SD_API_KEY,
-            model_id: "dream-shaper-8797",
-            prompt: prompt,
-            negative_prompt:
-              "extra fingers, mutated hands, poorly drawn hands, poorly drawn face, deformed, ugly, blurry, bad anatomy, bad proportions, extra limbs, cloned face, skinny, glitchy, double torso, extra arms, extra hands, mangled fingers, missing lips, ugly face, distorted face, extra legs",
-            width: 512,
-            height: 512,
-            samples: 1,
-            num_inference_steps: 30,
-            seed: null,
-            guidance_scale: 7.5,
-            webhook: null,
-            track_id: null,
-          }),
-        }
-      );
-      const responseJson = await response.json();
-      const imageUrl = responseJson.output[0];
-      setImage(imageUrl);
     } catch (e) {
       console.warn(e);
     } finally {
@@ -121,22 +81,7 @@ const CreatePage = () => {
             Magic!
           </Button>
         </View>
-        <View style={tw`flex flex-row justify-center items-center`}>
-          <Chip
-            style={tw`ml-2 mr-2`}
-            selected={selectedModel === "SDCreate"}
-            onPress={() => setSelectedModel("SDCreate")}
-          >
-            Stable Diffusion
-          </Chip>
-          <Chip
-            style={tw`ml-2 mr-2`}
-            selected={selectedModel === "DSCreate"}
-            onPress={() => setSelectedModel("DSCreate")}
-          >
-            DreamShaper
-          </Chip>
-        </View>
+
         <View>
           <CreateImage image={image} />
         </View>

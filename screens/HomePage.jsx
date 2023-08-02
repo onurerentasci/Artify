@@ -19,7 +19,7 @@ const HomePage = () => {
         tabBarOptions: {
           showLabel: false,
         },
-        tabBarIcon: ({ focused, color, size }) => {
+        tabBarIcon: ({ color }) => {
           return (
             <Octicons
               name={route.name === "create" ? "plus" : "person"}

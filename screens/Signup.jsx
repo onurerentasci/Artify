@@ -17,7 +17,7 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
 } from "firebase/auth";
-import { auth } from "../config/firebase";
+import { auth, firestore } from "../config/firebase";
 import firebase from "firebase/compat/app";
 
 const Signup = () => {
@@ -43,11 +43,18 @@ const Signup = () => {
     if (email && password && username) {
       setIsLoading(true);
       try {
-        await createUserWithEmailAndPassword(auth, email, password);
-        await firebase.firestore().collection("userData").add({
-          email: email,
-          username: username,
-        });
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        await firestore
+          .collection("userData")
+          .doc(userCredential.user.uid)
+          .set({
+            email: email,
+            username: username,
+          });
         navigation.navigate("home");
       } catch (e) {
         setIsLoading(false);

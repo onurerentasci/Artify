@@ -9,6 +9,7 @@ import firebase from "firebase/compat/app";
 
 const ProfilePage = () => {
   const [email, setEmail] = useState("");
+  const [likedImages, setLikedImages] = useState([]);
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -20,8 +21,6 @@ const ProfilePage = () => {
     };
   }, []);
 
-  const Tab = createMaterialTopTabNavigator();
-
   return (
     <View style={[tw`flex-1`, { backgroundColor: themeColors.bg }]}>
       <SafeAreaView style={[tw`flex-1 flex justify-around my-4 pt-3`]}>
@@ -30,7 +29,11 @@ const ProfilePage = () => {
             {email.split("@")[0]}
           </Text>
         </View>
-        <ScrollView></ScrollView>
+        <ScrollView>
+          {likedImages.map((likedImage, index) => (
+            <CreateImage key={index} image={likedImage} />
+          ))}
+        </ScrollView>
       </SafeAreaView>
     </View>
   );

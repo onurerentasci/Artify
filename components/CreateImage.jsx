@@ -6,6 +6,19 @@ import tw from "twrnc";
 import { FontAwesome } from "@expo/vector-icons";
 
 const CreateImage = ({ image }) => {
+  const [likedImages, setLikedImages] = useState([]);
+  const isLiked = likedImages.includes(image);
+
+  const handleLike = (imageUri) => {
+    if (isLiked) {
+      setLikedImages(likedImages.filter((img) => img !== imageUri));
+      console.log(likedImages);
+    } else {
+      setLikedImages([...likedImages, imageUri]);
+      console.log(likedImages);
+    }
+  };
+
   return (
     <Card
       style={[
@@ -22,17 +35,19 @@ const CreateImage = ({ image }) => {
         <>
           <Card.Cover source={{ uri: image }} style={[{ height: "100%" }]} />
           <FontAwesome
-            name="heart-o"
+            name={isLiked ? "heart" : "heart-o"}
             style={{
               position: "absolute",
               bottom: 10,
               right: 10,
-              fontSize: 40,
+              fontSize: 30,
               backgroundColor: "#fff",
-              padding: 10,
-              margin: 10,
-              borderRadius: 30,
+              color: "#b30000",
+              padding: 15,
+              margin: 15,
+              borderRadius: 20,
             }}
+            onPress={() => handleLike(image)}
           />
         </>
       )}
