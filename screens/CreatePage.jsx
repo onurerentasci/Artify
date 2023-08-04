@@ -11,7 +11,7 @@ const CreatePage = () => {
   const [prompt, setPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [image, setImage] = useState(null);
-  const [selectedModel, setSelectedModel] = useState("SDCreate");
+  const [likedImages, setLikedImages] = useState([]);
 
   async function SDCreate() {
     try {
@@ -71,11 +71,7 @@ const CreatePage = () => {
             textColor="#374151"
             loading={isLoading}
             onPress={() => {
-              if (selectedModel === "SDCreate") {
-                SDCreate();
-              } else if (selectedModel === "DSCreate") {
-                DSCreate();
-              }
+              SDCreate();
             }}
           >
             Magic!
@@ -83,7 +79,11 @@ const CreatePage = () => {
         </View>
 
         <View>
-          <CreateImage image={image} />
+          <CreateImage
+            image={image}
+            likedImages={likedImages}
+            setLikedImages={setLikedImages}
+          />
         </View>
       </SafeAreaView>
     </View>

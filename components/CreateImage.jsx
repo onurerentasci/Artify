@@ -12,10 +12,8 @@ const CreateImage = ({ image }) => {
   const handleLike = (imageUri) => {
     if (isLiked) {
       setLikedImages(likedImages.filter((img) => img !== imageUri));
-      console.log(likedImages);
     } else {
       setLikedImages([...likedImages, imageUri]);
-      console.log(likedImages);
     }
   };
 

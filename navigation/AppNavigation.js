@@ -5,7 +5,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import useAuth from "../hooks/useAuth";
 import HomePage from "../screens/HomePage";
 import CreatePage from "../screens/CreatePage";
-import ProfilePage from "../screens/ProfilePage";
 import LoginPage from "../screens/LoginPage";
 import Signup from "../screens/Signup";
 import WelcomePage from "../screens/WelcomePage";
@@ -42,11 +41,6 @@ export default function AppNavigation() {
             name="create"
             options={{ headerShown: false }}
             component={CreatePage}
-          />
-          <Stack.Screen
-            name="profile"
-            options={{ headerShown: false }}
-            component={ProfilePage}
           />
         </Stack.Navigator>
       </NavigationContainer>
