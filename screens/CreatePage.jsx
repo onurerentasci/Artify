@@ -51,7 +51,7 @@ const CreatePage = () => {
   return (
     <View
       style={[
-        tw`flex-1 bg-white h-4/5`,
+        tw`flex-1 bg-white h-4/5 pt-11`,
         { backgroundColor: themeColors.bg_light },
       ]}
     >

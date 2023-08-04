@@ -19,7 +19,7 @@ export default function AppNavigation() {
   useEffect(() => {
     const loadingTimer = setTimeout(() => {
       setIsLoading(false);
-    }, 4000);
+    }, 2000);
 
     return () => clearTimeout(loadingTimer);
   }, []);
