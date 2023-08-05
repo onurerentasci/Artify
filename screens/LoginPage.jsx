@@ -37,6 +37,10 @@ const LoginPage = () => {
           setError("Wrong password");
         } else if (e.code === "auth/email-already-in-use") {
           setError("E-mail already in use!");
+        } else if (e.code === "auth/user-not-found") {
+          setError("User not found!");
+        } else if (e.code === "auth/network-request-failed") {
+          setError("Check your connection");
         } else {
           setError(e.message);
         }
@@ -90,15 +94,13 @@ const LoginPage = () => {
           />
           <Text style={tw`text-gray-700 ml-4 mb-2`}>Password</Text>
           <TextInput
-            style={tw`p-4 bg-gray-100 text-gray-700 rounded-2xl`}
+            style={tw`p-4 mb-10 bg-gray-100 text-gray-700 rounded-2xl`}
             value={password}
             secureTextEntry
             onChangeText={(value) => setPassword(value)}
             placeholder="Enter Password"
           />
-          <TouchableOpacity style={tw`flex items-end mt-5`}>
-            <Text style={tw`flex items-end mb-1`}>Forgot Password?</Text>
-          </TouchableOpacity>
+
           <Button
             style={tw`py-1 bg-yellow-400 rounded-2xl mt-3`}
             mode="contained"

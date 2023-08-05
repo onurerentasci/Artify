@@ -65,6 +65,8 @@ const Signup = () => {
           setError("Password should be at least 6 characters");
         } else if (e.code === "auth/email-already-in-use") {
           setError("E-mail already in use!");
+        } else if (e.code === "auth/network-request-failed") {
+          setError("Check your connection");
         } else {
           setError(e.message);
         }

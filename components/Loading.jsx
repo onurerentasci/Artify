@@ -1,7 +1,6 @@
 import { View, Animated, Dimensions } from "react-native";
 import React, { useEffect, useRef } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import tw from "twrnc";
 import { themeColors } from "../theme";
 
 export default function Loading() {
@@ -20,29 +19,27 @@ export default function Loading() {
   ).current;
 
   useEffect(() => {
-    // Starting Animation after 2000ms....
     setTimeout(() => {
       Animated.parallel([
         Animated.timing(startAnimation, {
-          toValue: -Dimensions.get("window").height + (edges.top + 30),
+          toValue: -Dimensions.get("window").height + edges.top * 2.6,
           useNativeDriver: true,
         }),
         Animated.timing(scaleLogo, {
-          toValue: 0.2,
           useNativeDriver: true,
         }),
 
         Animated.timing(moveLogo, {
           toValue: {
-            x: Dimensions.get("window").width / 2 - 55,
-            y: Dimensions.get("window").height * 0.515,
+            x: Dimensions.get("window").width / 2.5,
+            y: Dimensions.get("window").height * 0.1,
           },
           useNativeDriver: true,
         }),
         Animated.timing(moveTitle, {
           toValue: {
-            x: Dimensions.get("window").width / 2 - 330,
-            y: Dimensions.get("window").height / 2 - 125,
+            x: Dimensions.get("window").width / 1000,
+            y: Dimensions.get("window").height / 3,
           },
           useNativeDriver: true,
         }),
@@ -85,11 +82,7 @@ export default function Loading() {
               width: 200,
               height: 200,
               marginBottom: 20,
-              transform: [
-                { translateX: moveLogo.x },
-                { translateY: moveLogo.y },
-                { scale: scaleLogo },
-              ],
+              transform: [{ translateY: moveLogo.y }, { scale: scaleLogo }],
             }}
           ></Animated.Image>
 
