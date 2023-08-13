@@ -1,6 +1,6 @@
 <h1 align="center"><strong> Artify - Image Generator</h1></strong>
-<img src="https://github.com/onurerentasci/Artify/assets/82609661/1c116d86-6529-4583-a75f-45486a41e670"/>
-<img src="https://github.com/onurerentasci/Artify/assets/82609661/8c8719d7-d84e-4370-9cf0-71bdf20a5f8a"/>
+<img src="https://github.com/onurerentasci/Artify/assets/82609661/6dca4469-77a1-4b3a-84a0-55db20795fb0"/>
+<img src="https://github.com/onurerentasci/Artify/assets/82609661/16a9926f-3346-49c1-97e2-39d0943bcb46"/>
 <div align="center">Artify, yapay zeka destekli fotoğraf oluşturma yetenekleri sunan etkileyici bir mobil uygulamadır. Bu uygulama, Stable Diffusion API'larını kullanarak gerçekçi ve sanatsal fotoğraflar üretmenize olanak tanır.</div>
 <br/>
   <div>
